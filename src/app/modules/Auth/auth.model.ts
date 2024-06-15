@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import { Role } from "./auth.constant";
 import { TSignup } from "./auth.interface";
 
 const signupSchema = new Schema<TSignup>(
@@ -24,7 +23,7 @@ const signupSchema = new Schema<TSignup>(
     },
     role: {
       type: String,
-      enum: Role,
+      enum: ["admin", "user"],
       required: true,
     },
     address: {
