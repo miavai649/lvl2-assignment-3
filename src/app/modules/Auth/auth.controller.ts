@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { authValidation } from "./auth.validation";
 import { AuthServices } from "./auth.service";
 
-const signUp = async (req: Request, res: Response) => {
+const signUp = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const singUpdata = req.body;
 
@@ -16,12 +16,8 @@ const signUp = async (req: Request, res: Response) => {
       message: "User created successfully",
       data: result,
     });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Failed to create user",
-      error: error,
-    });
+  } catch (err) {
+    next(err);
   }
 };
 
