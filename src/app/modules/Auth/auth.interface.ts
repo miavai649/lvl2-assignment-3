@@ -1,8 +1,10 @@
-export type TUser = {
+export type TRole = "admin" | "user";
+
+export type TSignup = {
   name: string;
   email: string;
   password: string;
   phone: string;
-  role: "admin" | "user";
+  role: TRole;
   address: string;
 };
