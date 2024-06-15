@@ -23,7 +23,7 @@ app.get("/", (req: Request, res: Response) => {
 // global error handler middleware
 app.use(globalErrorHandler);
 
-// not found route
+// not found route middleware
 app.use(notFound);
 
 export default app;
