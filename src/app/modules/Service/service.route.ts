@@ -17,5 +17,6 @@ router.put(
   validateRequest(ServiceValidation.updateServiceValidationSchema),
   ServiceControllers.updateService
 )
+router.delete('/:id', ServiceControllers.deleteService)
 
 export const ServiceRoutes = router
