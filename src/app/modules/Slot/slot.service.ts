@@ -49,6 +49,23 @@ const createSlotIntoDb = async (payload: TSlot) => {
   return result;
 };
 
+const getAllSlotsFromDb = async (query: Record<string, unknown>) => {
+  const { date, serviceId } = query;
+
+  const filter: Record<string, unknown> = {};
+
+  if (date) {
+    filter["date"] = date;
+  }
+  if (serviceId) {
+    filter["service"] = serviceId;
+  }
+
+  const result = await Slot.find(filter).populate("service");
+  return result;
+};
+
 export const SlotServices = {
   createSlotIntoDb,
+  getAllSlotsFromDb,
 };
