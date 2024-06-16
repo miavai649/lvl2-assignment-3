@@ -55,6 +55,7 @@ signupSchema.pre("save", async function (next) {
   next();
 });
 
+// checking the password is it match or not
 signupSchema.statics.isPasswordMatched = async function (
   plainTextPassword: string,
   hashedPassword: string,
