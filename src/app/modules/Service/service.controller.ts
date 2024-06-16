@@ -16,6 +16,36 @@ const getSingleService = catchAsync(async (req, res) => {
   const { id } = req.params;
 
   const result = await ServiceServices.getSingleServiceFromDb(id);
+
+  if (!result) {
+    sendResponse(res, {
+      statusCode: 404,
+      success: false,
+      message: "No Data Found",
+      data: [],
+    });
+  }
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Service retrieved successfully",
+    data: result,
+  });
+});
+
+const getAllService = catchAsync(async (req, res) => {
+  const result = await ServiceServices.getAllServicesFromDb();
+
+  if (!result) {
+    sendResponse(res, {
+      statusCode: 404,
+      success: false,
+      message: "No Data Found",
+      data: [],
+    });
+  }
+
   sendResponse(res, {
     statusCode: 200,
     success: true,
@@ -27,4 +57,5 @@ const getSingleService = catchAsync(async (req, res) => {
 export const ServiceControllers = {
   createService,
   getSingleService,
+  getAllService,
 };
