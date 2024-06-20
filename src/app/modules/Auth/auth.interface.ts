@@ -1,4 +1,5 @@
 import { Model } from "mongoose";
+import { User_Role } from "./auth.constant";
 
 export type TSignup = {
   name: string;
@@ -13,6 +14,8 @@ export type TLogin = {
   email: string;
   password: string;
 };
+
+export type TUserRole = keyof typeof User_Role;
 
 export interface AuthModel extends Model<TSignup> {
   isPasswordMatched(plainTextPassword: string, hashedPassword: string): boolean;
