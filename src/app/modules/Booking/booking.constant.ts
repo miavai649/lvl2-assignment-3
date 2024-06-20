@@ -11,4 +11,4 @@ export const VEHICLE_TYPES: TVehicleType[] = [
   "hybridVehicle",
   "bicycle",
   "tractor",
-];
+] as const;
