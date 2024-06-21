@@ -38,8 +38,8 @@ const auth = (...requiredRoles: TUserRole[]) => {
     // checking if the user have that authorization
     if (requiredRoles && !requiredRoles.includes(userRole)) {
       throw new CustomAppError(
-        httpStatus.FORBIDDEN,
-        "You are not authorized to perform this action",
+        httpStatus.UNAUTHORIZED,
+        "You have no access to this route",
       );
     }
 
