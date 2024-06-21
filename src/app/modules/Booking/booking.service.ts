@@ -132,7 +132,26 @@ const getAllBookingsFromDb = async () => {
   return result;
 };
 
+const getUsersBookingFromDb = async (userEmail: string) => {
+  const user = await Auth.findOne({ email: userEmail });
+
+  // const userId = new Types.ObjectId(user?._id)
+
+  const result = await Booking.find({ customer: user?._id })
+    .select("-customer")
+    .populate({
+      path: "service",
+      select: "-createdAt -updatedAt",
+    })
+    .populate({
+      path: "slot",
+      select: "-createdAt -updatedAt",
+    });
+  return result;
+};
+
 export const BookingServices = {
   createBookingIntoDb,
   getAllBookingsFromDb,
+  getUsersBookingFromDb,
 };
