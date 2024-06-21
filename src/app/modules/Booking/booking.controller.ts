@@ -19,6 +19,16 @@ const createBooking = catchAsync(async (req, res) => {
 const getAllBookings = catchAsync(async (req, res) => {
   const result = await BookingServices.getAllBookingsFromDb();
 
+  // if the database collection is empty
+  if (!result.length) {
+    return sendResponse(res, {
+      statusCode: 404,
+      success: false,
+      message: "No Data Found",
+      data: [],
+    });
+  }
+
   sendResponse(res, {
     statusCode: 200,
     success: true,
@@ -31,6 +41,16 @@ const getUsersBooking = catchAsync(async (req, res) => {
   const result = await BookingServices.getUsersBookingFromDb(
     req.user.userEmail,
   );
+
+  // if no matching data is found
+  if (!result.length) {
+    return sendResponse(res, {
+      statusCode: 404,
+      success: false,
+      message: "No Data Found",
+      data: [],
+    });
+  }
 
   sendResponse(res, {
     statusCode: 200,

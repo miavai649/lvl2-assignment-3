@@ -135,8 +135,6 @@ const getAllBookingsFromDb = async () => {
 const getUsersBookingFromDb = async (userEmail: string) => {
   const user = await Auth.findOne({ email: userEmail });
 
-  // const userId = new Types.ObjectId(user?._id)
-
   const result = await Booking.find({ customer: user?._id })
     .select("-customer")
     .populate({

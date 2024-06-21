@@ -19,7 +19,7 @@ const getSingleService = catchAsync(async (req, res) => {
 
   // if no matching data is found
   if (!result) {
-    sendResponse(res, {
+    return sendResponse(res, {
       statusCode: 404,
       success: false,
       message: "No Data Found",
@@ -40,8 +40,8 @@ const getAllService = catchAsync(async (req, res) => {
   const result = await ServiceServices.getAllServicesFromDb();
 
   // if database collection is empty
-  if (!result) {
-    sendResponse(res, {
+  if (!result.length) {
+    return sendResponse(res, {
       statusCode: 404,
       success: false,
       message: "No Data Found",
