@@ -3,6 +3,7 @@ import { ErrorRequestHandler } from "express";
 import httpStatus from "http-status";
 import handleZodError from "../errors/handleZodError";
 import { TErrorMessages } from "../interface/error";
+import handleValidationError from "../errors/handleValidationError";
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = 500;
@@ -18,8 +19,12 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     statusCode = errorRes.statusCode;
     message = errorRes.message;
     errorMessages = errorRes.errorMessages;
+  } else if (err?.name === "ValidationError") {
+    const errorRes = handleValidationError(err);
+    statusCode = errorRes.statusCode;
+    message = errorRes.message;
+    errorMessages = errorRes.errorMessages;
   }
-
   /*
     {
     "success": false,
