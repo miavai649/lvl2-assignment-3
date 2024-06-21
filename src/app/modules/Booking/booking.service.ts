@@ -6,6 +6,7 @@ import CustomAppError from "../errors/CustomAppError";
 import httpStatus from "http-status";
 import { Booking } from "./booking.model";
 import { Slot } from "../Slot/slot.model";
+import { Service } from "../Service/service.model";
 
 const createBookingIntoDb = async (
   userEmail: string,
@@ -16,6 +17,38 @@ const createBookingIntoDb = async (
   // check if the user is exist or not
   if (!user) {
     throw new CustomAppError(httpStatus.NOT_FOUND, "User not found");
+  }
+
+  // finding service for validations
+  const service = await Service.findById(payload.serviceId);
+
+  // finding slot for validations
+  const slot = await Slot.findById(payload.slotId);
+
+  // check if the service is exist or not
+  if (!service) {
+    throw new CustomAppError(httpStatus.NOT_FOUND, "Service not found");
+  }
+
+  // check if the service is deleted or not
+  if (service?.isDeleted) {
+    throw new CustomAppError(
+      httpStatus.BAD_REQUEST,
+      "Service has been deleted",
+    );
+  }
+
+  // check if the slot is exist or not and also the slot is valid or not
+  if (!slot || !slot.service.equals(service._id)) {
+    throw new CustomAppError(
+      httpStatus.BAD_REQUEST,
+      "Invalid slot or slot not found",
+    );
+  }
+
+  // check if the slot is available or not
+  if (slot?.isBooked === "booked" || slot?.isBooked === "canceled") {
+    throw new CustomAppError(httpStatus.BAD_REQUEST, "Slot is not available");
   }
 
   const bookingData: Partial<TBooking> = {
