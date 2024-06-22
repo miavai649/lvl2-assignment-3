@@ -4,6 +4,7 @@ import httpStatus from "http-status";
 import handleZodError from "../errors/handleZodError";
 import { TErrorMessages } from "../interface/error";
 import handleValidationError from "../errors/handleValidationError";
+import handleCastError from "../errors/handleCastError";
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = 500;
@@ -21,6 +22,11 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     errorMessages = errorRes.errorMessages;
   } else if (err?.name === "ValidationError") {
     const errorRes = handleValidationError(err);
+    statusCode = errorRes.statusCode;
+    message = errorRes.message;
+    errorMessages = errorRes.errorMessages;
+  } else if (err?.name === "CastError") {
+    const errorRes = handleCastError(err);
     statusCode = errorRes.statusCode;
     message = errorRes.message;
     errorMessages = errorRes.errorMessages;
