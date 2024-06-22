@@ -5,6 +5,8 @@ import handleZodError from "../errors/handleZodError";
 import { TErrorMessages } from "../interface/error";
 import handleValidationError from "../errors/handleValidationError";
 import handleCastError from "../errors/handleCastError";
+import handleDuplicateError from "../errors/handleDuplicateError";
+import CustomAppError from "../errors/CustomAppError";
 
 const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = 500;
@@ -30,6 +32,28 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     statusCode = errorRes.statusCode;
     message = errorRes.message;
     errorMessages = errorRes.errorMessages;
+  } else if (err?.code === 11000) {
+    const errorRes = handleDuplicateError(err);
+    statusCode = errorRes.statusCode;
+    message = errorRes.message;
+    errorMessages = errorRes.errorMessages;
+  } else if (err instanceof CustomAppError) {
+    statusCode = err.statusCode;
+    message = err.message;
+    errorMessages = [
+      {
+        path: "",
+        message: err.message,
+      },
+    ];
+  } else if (err instanceof Error) {
+    message = err.message;
+    errorMessages = [
+      {
+        path: "",
+        message: err.message,
+      },
+    ];
   }
   /*
     {
@@ -49,7 +73,6 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     success: false,
     message,
     errorMessages,
-    error: err,
     stack,
   });
 };
