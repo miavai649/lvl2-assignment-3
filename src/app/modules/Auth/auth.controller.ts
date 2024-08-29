@@ -3,12 +3,13 @@ import { AuthServices } from './auth.service'
 import catchAsync from '../utils/catchAsync'
 import sendResponse from '../utils/sendResponse'
 import config from '../../config'
+import httpStatus from 'http-status'
 
 const signUp = catchAsync(async (req: Request, res: Response) => {
   const result = await AuthServices.signUp(req.body)
 
   sendResponse(res, {
-    statusCode: 200,
+    statusCode: httpStatus.OK,
     success: true,
     message: 'User registered successfully',
     data: result
@@ -26,7 +27,7 @@ const logIn = catchAsync(async (req, res) => {
   })
 
   sendResponse(res, {
-    statusCode: 200,
+    statusCode: httpStatus.OK,
     success: true,
     message: 'User logged in successfully',
     token: accessToken,
@@ -34,7 +35,20 @@ const logIn = catchAsync(async (req, res) => {
   })
 })
 
+const refreshToken = catchAsync(async (req, res) => {
+  const { refreshToken } = req.cookies
+  const result = await AuthServices.refreshToken(refreshToken)
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Access token is retrieved succesfully!',
+    data: result
+  })
+})
+
 export const AuthController = {
   signUp,
-  logIn
+  logIn,
+  refreshToken
 }

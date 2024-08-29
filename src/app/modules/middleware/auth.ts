@@ -5,6 +5,7 @@ import { JwtPayload } from 'jsonwebtoken'
 import { TUserRole } from '../Auth/auth.interface'
 import { Auth } from '../Auth/auth.model'
 import { verifyToken } from '../Auth/auth.utils'
+import config from '../../config'
 
 const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req, res, next) => {
@@ -21,7 +22,7 @@ const auth = (...requiredRoles: TUserRole[]) => {
     const token = tokenWithBearer.split(' ')[1]
 
     // verifying the given token
-    const decoded = verifyToken(token)
+    const decoded = verifyToken(token, config.jwt_access_token as string)
 
     const { userEmail, userRole } = decoded
 
