@@ -3,5 +3,6 @@ export type TResponse<T> = {
   success: boolean;
   message: string;
   token?: string;
+  refreshToken?: string;
   data: T;
 };

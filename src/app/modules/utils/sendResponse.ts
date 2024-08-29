@@ -2,11 +2,12 @@ import { Response } from "express";
 import { TResponse } from "../interface/response";
 
 const sendResponse = <T>(res: Response, data: TResponse<T>) => {
-  if (data?.token) {
+  if (data?.token && data?.refreshToken) {
     res.status(data.statusCode).json({
       success: data.success,
       statusCode: data.statusCode,
       token: data.token,
+      refreshToken: data.refreshToken,
       message: data.message,
       data: data.data,
     });

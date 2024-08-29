@@ -3,7 +3,6 @@ import CustomAppError from '../errors/CustomAppError'
 import { TLogin, TSignup } from './auth.interface'
 import { Auth } from './auth.model'
 import httpStatus from 'http-status'
-import jwt from 'jsonwebtoken'
 import { createToken } from './auth.utils'
 
 const signUp = async (payload: TSignup) => {
@@ -32,12 +31,19 @@ const logIn = async (payload: TLogin) => {
     config.jwt_access_token_expires_in as string
   )
 
+  const refreshToken = createToken(
+    jwtPayload,
+    config.jwt_refresh_token as string,
+    config.jwt_refresh_token_expires_in as string
+  )
+
   const responseData = await Auth.findOne({ email: payload.email }).select(
     '-__v'
   )
 
   return {
     accessToken,
+    refreshToken,
     responseData
   }
 }
