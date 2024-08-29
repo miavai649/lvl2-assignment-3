@@ -1,24 +1,23 @@
-import { Response } from "express";
-import { TResponse } from "../interface/response";
+import { Response } from 'express'
+import { TResponse } from '../interface/response'
 
 const sendResponse = <T>(res: Response, data: TResponse<T>) => {
-  if (data?.token && data?.refreshToken) {
+  if (data?.token) {
     res.status(data.statusCode).json({
       success: data.success,
       statusCode: data.statusCode,
       token: data.token,
-      refreshToken: data.refreshToken,
       message: data.message,
-      data: data.data,
-    });
+      data: data.data
+    })
   } else {
     res.status(data.statusCode).json({
       success: data.success,
       statusCode: data.statusCode,
       message: data.message,
-      data: data.data,
-    });
+      data: data.data
+    })
   }
-};
+}
 
-export default sendResponse;
+export default sendResponse
