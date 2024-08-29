@@ -8,6 +8,10 @@ const createServiceValidationSchema = z.object({
     description: z.string({
       required_error: "Service description is required",
     }),
+    image: z.string({
+      required_error: "Service image is required",
+    }),
+
     price: z
       .number({
         required_error: "Service price is required",
@@ -27,6 +31,7 @@ const updateServiceValidationSchema = z.object({
     .object({
       name: z.string().optional(),
       description: z.string().optional(),
+      image: z.string().optional(),
       price: z
         .number()
         .nonnegative("Service price must be a non-negative number")
