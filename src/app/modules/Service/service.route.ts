@@ -20,11 +20,7 @@ router.get(
   auth(User_Role.admin, User_Role.user),
   ServiceControllers.getSingleService,
 );
-router.get(
-  "/",
-  auth(User_Role.admin, User_Role.user),
-  ServiceControllers.getAllService,
-);
+router.get("/", ServiceControllers.getAllService);
 
 router.put(
   "/:id",
