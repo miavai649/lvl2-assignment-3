@@ -1,41 +1,37 @@
-import express from "express";
-import { ServiceControllers } from "./service.controller";
-import validateRequest from "../middleware/validateRequest";
-import { ServiceValidation } from "./service.validation";
-import { SlotValidation } from "../Slot/slot.validation";
-import { SlotControllers } from "../Slot/slot.controller";
-import auth from "../middleware/auth";
-import { User_Role } from "../Auth/auth.constant";
+import express from 'express'
+import { ServiceControllers } from './service.controller'
+import validateRequest from '../middleware/validateRequest'
+import { ServiceValidation } from './service.validation'
+import { SlotValidation } from '../Slot/slot.validation'
+import { SlotControllers } from '../Slot/slot.controller'
+import auth from '../middleware/auth'
+import { User_Role } from '../Auth/auth.constant'
 
-const router = express.Router();
+const router = express.Router()
 
 router.post(
-  "/",
+  '/',
   auth(User_Role.admin),
   validateRequest(ServiceValidation.createServiceValidationSchema),
-  ServiceControllers.createService,
-);
-router.get(
-  "/:id",
-  auth(User_Role.admin, User_Role.user),
-  ServiceControllers.getSingleService,
-);
-router.get("/", ServiceControllers.getAllService);
+  ServiceControllers.createService
+)
+router.get('/:id', ServiceControllers.getSingleService)
+router.get('/', ServiceControllers.getAllService)
 
 router.put(
-  "/:id",
+  '/:id',
   auth(User_Role.admin),
   validateRequest(ServiceValidation.updateServiceValidationSchema),
-  ServiceControllers.updateService,
-);
-router.delete("/:id", auth(User_Role.admin), ServiceControllers.deleteService);
+  ServiceControllers.updateService
+)
+router.delete('/:id', auth(User_Role.admin), ServiceControllers.deleteService)
 
 // create slots for Service
 router.post(
-  "/slots",
+  '/slots',
   auth(User_Role.admin),
   validateRequest(SlotValidation.createSlotValidationSchema),
-  SlotControllers.createSlot,
-);
+  SlotControllers.createSlot
+)
 
-export const ServiceRoutes = router;
+export const ServiceRoutes = router
