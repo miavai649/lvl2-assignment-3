@@ -23,5 +23,6 @@ router.post(
   AuthController.refreshToken,
 );
 router.get("/users", auth(User_Role.admin), AuthController.getAllUsers);
+router.put("/user/:id", auth(User_Role.admin), AuthController.updateUserRole);
 
 export const AuthRoutes = router;

@@ -82,9 +82,15 @@ const getAllUsersFromDb = async () => {
   return result;
 };
 
+const updateUserRoleIntoDb = async (id: string, payload: { role: string }) => {
+  const result = await Auth.findByIdAndUpdate(id, payload, { new: true });
+  return result;
+};
+
 export const AuthServices = {
   signUp,
   logIn,
   refreshToken,
   getAllUsersFromDb,
+  updateUserRoleIntoDb,
 };

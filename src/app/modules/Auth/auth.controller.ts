@@ -58,9 +58,23 @@ const getAllUsers = catchAsync(async (req, res) => {
   });
 });
 
+const updateUserRole = catchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  const result = await AuthServices.updateUserRoleIntoDb(id, req.body);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Access token is retrieved successfully!",
+    data: result,
+  });
+});
+
 export const AuthController = {
   signUp,
   logIn,
   refreshToken,
   getAllUsers,
+  updateUserRole,
 };
