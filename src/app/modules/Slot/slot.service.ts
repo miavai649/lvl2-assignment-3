@@ -65,6 +65,11 @@ const getAllSlotsFromDb = async (query: Record<string, unknown>) => {
   return result
 }
 
+const getSingleSlotsFromDb = async (id: string) => {
+  const result = await Slot.findById(id)
+  return result
+}
+
 const updateSlotStatusIntoDb = async (id: string, payload: Partial<TSlot>) => {
   const result = await Slot.findByIdAndUpdate(id, payload, { new: true })
   return result
@@ -79,5 +84,6 @@ export const SlotServices = {
   createSlotIntoDb,
   getAllSlotsFromDb,
   updateSlotStatusIntoDb,
-  deleteSlotFromDb
+  deleteSlotFromDb,
+  getSingleSlotsFromDb
 }
