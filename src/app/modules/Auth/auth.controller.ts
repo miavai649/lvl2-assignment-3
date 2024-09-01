@@ -42,7 +42,18 @@ const refreshToken = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Access token is retrieved succesfully!",
+    message: "Access token is retrieved successfully!",
+    data: result,
+  });
+});
+
+const getAllUsers = catchAsync(async (req, res) => {
+  const result = await AuthServices.getAllUsersFromDb();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Access token is retrieved successfully!",
     data: result,
   });
 });
@@ -51,4 +62,5 @@ export const AuthController = {
   signUp,
   logIn,
   refreshToken,
+  getAllUsers,
 };

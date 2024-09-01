@@ -77,8 +77,14 @@ const refreshToken = async (token: string) => {
   };
 };
 
+const getAllUsersFromDb = async () => {
+  const result = await Auth.find().sort("-createdAt");
+  return result;
+};
+
 export const AuthServices = {
   signUp,
   logIn,
   refreshToken,
+  getAllUsersFromDb,
 };
