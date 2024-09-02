@@ -9,6 +9,9 @@ const signupSchema = new Schema<TSignup, AuthModel>(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+    },
     email: {
       type: String,
       required: true,

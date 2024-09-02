@@ -2,6 +2,7 @@ import { Model } from "mongoose";
 import { User_Role } from "./auth.constant";
 
 export type TSignup = {
+  image?: string;
   name: string;
   email: string;
   password: string;
