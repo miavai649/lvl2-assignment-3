@@ -42,16 +42,6 @@ const getUsersBooking = catchAsync(async (req, res) => {
     req.user.userEmail,
   );
 
-  // if no matching data is found
-  if (!result.length) {
-    return sendResponse(res, {
-      statusCode: 404,
-      success: false,
-      message: "No Data Found",
-      data: [],
-    });
-  }
-
   sendResponse(res, {
     statusCode: 200,
     success: true,

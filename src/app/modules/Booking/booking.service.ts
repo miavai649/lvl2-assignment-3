@@ -136,7 +136,10 @@ const getUsersBookingFromDb = async (userEmail: string) => {
   const user = await Auth.findOne({ email: userEmail });
 
   const result = await Booking.find({ customer: user?._id })
-    .select("-customer")
+    .populate({
+      path: "customer",
+      select: "-createdAt -updatedAt",
+    })
     .populate({
       path: "service",
       select: "-createdAt -updatedAt",
