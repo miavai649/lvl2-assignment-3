@@ -1,5 +1,5 @@
-import dotenv from 'dotenv'
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
 
 export default {
   node_env: process.env.NODE_ENV,
@@ -12,5 +12,5 @@ export default {
   jwt_refresh_token_expires_in: process.env.JWT_REFRESH_TOKEN_EXPIRES_IN,
   store_id: process.env.STORE_ID,
   signature_key: process.env.SIGNATURE_KEY,
-  payment_url: process.env.PAYMENT_URL
-}
+  payment_url: process.env.PAYMENT_URL,
+};

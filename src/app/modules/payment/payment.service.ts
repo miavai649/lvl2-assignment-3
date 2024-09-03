@@ -1,10 +1,10 @@
 const confirmationService = async (query: Record<string, unknown>) => {
-  const { status } = query
+  const { status } = query;
 
   // Todo: must change the url with live link
 
   // check the status and return the appropriate HTML response
-  if (status === 'success') {
+  if (status === "success") {
     return `
       <!DOCTYPE html>
       <html lang="en">
@@ -77,8 +77,8 @@ const confirmationService = async (query: Record<string, unknown>) => {
         </div>
       </body>
       </html>
-    `
-  } else if (status === 'failed') {
+    `;
+  } else if (status === "failed") {
     return `
       <!DOCTYPE html>
       <html lang="en">
@@ -151,7 +151,7 @@ const confirmationService = async (query: Record<string, unknown>) => {
         </div>
       </body>
       </html>
-    `
+    `;
   }
 
   // Default response if no valid status is provided
@@ -213,9 +213,9 @@ const confirmationService = async (query: Record<string, unknown>) => {
       </div>
     </body>
     </html>
-  `
-}
+  `;
+};
 
 export const PaymentServices = {
-  confirmationService
-}
+  confirmationService,
+};

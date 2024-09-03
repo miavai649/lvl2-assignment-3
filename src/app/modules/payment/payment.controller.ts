@@ -1,12 +1,12 @@
-import catchAsync from '../utils/catchAsync'
-import { PaymentServices } from './payment.service'
+import catchAsync from "../utils/catchAsync";
+import { PaymentServices } from "./payment.service";
 
 const confirmationController = catchAsync(async (req, res) => {
-  const result = await PaymentServices.confirmationService(req.query)
+  const result = await PaymentServices.confirmationService(req.query);
 
-  res.send(result)
-})
+  res.send(result);
+});
 
 export const paymentController = {
-  confirmationController
-}
+  confirmationController,
+};

@@ -1,7 +1,7 @@
-import express from 'express'
-import { paymentController } from './payment.controller'
-const router = express.Router()
+import express from "express";
+import { paymentController } from "./payment.controller";
+const router = express.Router();
 
-router.post('/confirmation', paymentController.confirmationController)
+router.post("/confirmation", paymentController.confirmationController);
 
-export const PaymentRoute = router
+export const PaymentRoute = router;
