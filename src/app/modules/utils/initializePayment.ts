@@ -24,7 +24,7 @@ export const initializePayment = async (payload: TransactionData) => {
       tran_id: payload.transactionId,
       success_url: `http://localhost:5000/api/payment/confirmation?status=success`,
       fail_url: `http://localhost:5000/api/payment/confirmation?status=failed`,
-      cancel_url: "http://localhost:5173/",
+      cancel_url: "https://cleancarz.vercel.app",
       amount: payload.price,
       currency: "BDT",
       desc: "Merchant Registration Payment",

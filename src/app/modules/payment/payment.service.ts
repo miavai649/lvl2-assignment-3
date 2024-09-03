@@ -1,10 +1,10 @@
 const confirmationService = async (query: Record<string, unknown>) => {
-  const { status } = query;
+  const { status } = query
 
   // Todo: must change the url with live link
 
   // check the status and return the appropriate HTML response
-  if (status === "success") {
+  if (status === 'success') {
     return `
       <!DOCTYPE html>
       <html lang="en">
@@ -73,12 +73,12 @@ const confirmationService = async (query: Record<string, unknown>) => {
           <div class="checkmark">&#10003;</div>
           <h1>Payment Successful!</h1>
           <p>Thank you for your payment. Your transaction has been completed successfully. You will receive a confirmation email shortly.</p>
-          <a href="http://localhost:5173/" class="btn">Return to Home</a> 
+          <a href="https://cleancarz.vercel.app" class="btn">Return to Home</a> 
         </div>
       </body>
       </html>
-    `;
-  } else if (status === "failed") {
+    `
+  } else if (status === 'failed') {
     return `
       <!DOCTYPE html>
       <html lang="en">
@@ -147,14 +147,13 @@ const confirmationService = async (query: Record<string, unknown>) => {
           <div class="crossmark">&#10060;</div>
           <h1>Payment Failed!</h1>
           <p>Unfortunately, your payment was not successful. Please try again or contact support if the issue persists.</p>
-          <a href="http://localhost:5173/" class="btn">Return to Home</a> 
+          <a href="https://cleancarz.vercel.app" class="btn">Return to Home</a> 
         </div>
       </body>
       </html>
-    `;
+    `
   }
 
-  // Default response if no valid status is provided
   return `
     <!DOCTYPE html>
     <html lang="en">
@@ -209,13 +208,13 @@ const confirmationService = async (query: Record<string, unknown>) => {
     <body>
       <div class="container">
         <p>Payment status is unclear. Please contact support.</p>
-        <a href="http://localhost:5173/" class="btn">Return to Home</a> 
+        <a href="https://cleancarz.vercel.app" class="btn">Return to Home</a> 
       </div>
     </body>
     </html>
-  `;
-};
+  `
+}
 
 export const PaymentServices = {
-  confirmationService,
-};
+  confirmationService
+}
